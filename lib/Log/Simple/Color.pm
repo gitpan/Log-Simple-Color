@@ -1,22 +1,10 @@
 package Log::Simple::Color;
 
+use version; our $VERSION = qv('0.0.2');
+
 use 5.008_001;
 use strict;
 use warnings;
-use version;
-our $VERSION = qv('0.0.1');
-
-BEGIN {
-    if ($] < 5.010) {
-        require Perl6::Say;
-        import Perl6::Say qw(say);
-    }
-    else {
-        eval 'use feature qw(say)';
-        require feature;
-        import feature qw(say);
-    }
-}
 
 my $win32;
 my $ansi;
@@ -37,27 +25,27 @@ my %default_msg = (
     debug => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{debug} < $log_level_of{$self->level};
-        say "[DEBUG] ", @args;
+        print "[DEBUG] ", @args, "\n";
     },
     info => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{info} < $log_level_of{$self->level};
-        say "[INFO] ", @args;
+        print "[INFO] ", @args, "\n";
     },
     warning => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{warning} < $log_level_of{$self->level};
-        say "[WARNING] ", @args;
+        print "[WARNING] ", @args, "\n";
     },
     error => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{error} < $log_level_of{$self->level};
-        say "[ERROR] ", @args;
+        print "[ERROR] ", @args, "\n";
     },
     default => sub {
         my ( $self, $mode, @args ) = @_;
         return if $log_level_of{default} < $log_level_of{$self->level};
-        say "[$mode] ", @args;
+        print "[$mode] ", @args, "\n";
     },
 );
 
@@ -65,27 +53,27 @@ my %linux_msg = (
     debug => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{debug} < $log_level_of{$self->level};
-        say @{ $color_of{debug} }, @args, @{ $color_of{default} };
+        print @{ $color_of{debug} }, @args, @{ $color_of{default} }, "\n";
     },
     info => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{info} < $log_level_of{$self->level};
-        say @{ $color_of{info} }, @args, @{ $color_of{default} };
+        print @{ $color_of{info} }, @args, @{ $color_of{default} }, "\n";
     },
     warning => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{warning} < $log_level_of{$self->level};
-        say @{ $color_of{warning} }, @args, @{ $color_of{default} };
+        print @{ $color_of{warning} }, @args, @{ $color_of{default} }, "\n";
     },
     error => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{error} < $log_level_of{$self->level};
-        say @{ $color_of{error} }, @args, @{ $color_of{default} };
+        print @{ $color_of{error} }, @args, @{ $color_of{default} }, "\n";
     },
     default => sub {
         my ( $self, $mode, @args ) = @_;
         return if $log_level_of{default} < $log_level_of{$self->level};
-        say "[$mode] ", @args;
+        print "[$mode] ", @args, "\n";
     },
 );
 
@@ -94,34 +82,34 @@ my %window_msg = (
         my ( $self, @args ) = @_;
         return if $log_level_of{debug} < $log_level_of{$self->level};
         $console->Attr(@{ $color_of{debug} });
-        say @args;
+        print @args, "\n";
         $console->Attr(@{ $color_of{default} });
     },
     info => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{info} < $log_level_of{$self->level};
         $console->Attr(@{ $color_of{info} });
-        say @args;
+        print @args, "\n";
         $console->Attr(@{ $color_of{default} });
     },
     warning => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{warning} < $log_level_of{$self->level};
         $console->Attr(@{ $color_of{warning} });
-        say @args;
+        print @args, "\n";
         $console->Attr(@{ $color_of{default} });
     },
     error => sub {
         my ( $self, @args ) = @_;
         return if $log_level_of{error} < $log_level_of{$self->level};
         $console->Attr(@{ $color_of{error} });
-        say @args;
+        print @args, "\n";
         $console->Attr(@{ $color_of{default} });
     },
     default => sub {
         my ( $self, $mode, @args ) = @_;
         return if $log_level_of{default} < $log_level_of{$self->level};
-        say "[$mode] ", @args
+        print "[$mode] ", @args, "\n"
     },
 );
 
@@ -144,7 +132,7 @@ if ($^O eq 'MSWin32') {
         $msg{default} = $window_msg{default};
     }
     else {
-        say "Recommand CPAN Perl Module: [Win32::Console]";
+        print "Recommand CPAN Perl Module: [Win32::Console]\n";
         $msg{debug}   = $default_msg{debug};
         $msg{info}    = $default_msg{info};
         $msg{warning} = $default_msg{warning};
@@ -170,7 +158,7 @@ else {
         $msg{default} = $linux_msg{default};
     }
     else {
-        say "Recommand CPAN Perl Module: [Win32::Console]";
+        print "Recommand CPAN Perl Module: [Win32::Console]\n";
         $msg{debug}   = $default_msg{debug};
         $msg{info}    = $default_msg{info};
         $msg{warning} = $default_msg{warning};
@@ -294,17 +282,18 @@ sub color {
 }
 
 1;
-
 __END__
+
+=encoding utf-8
 
 =head1 NAME
 
-Log::Simple::Color - log messages with different color for console
+Log::Simple::Color - Log messages with different color for console
 
 
 =head1 VERSION
 
-This document describes Log::Simple::Color version 0.0.1
+This document describes Log::Simple::Color version 0.0.2
 
 
 =head1 SYNOPSIS
@@ -397,10 +386,6 @@ To install this module, run the following commands:
 
 =item *
 
-Perl6::Say - if perl version is below than 5.10
-
-=item *
-
 Win32::Console - if OS is win32
 
 =item *
@@ -426,12 +411,12 @@ L<http://rt.cpan.org>.
 
 =head1 AUTHOR
 
-Keedi Kim - 김도형  C<< <keedi@perl.kr> >>
+Keedi Kim - 김도형  C<< <keedi@cpan.org> >>
 
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2008, Keedi Kim - 김도형 C<< <keedi@perl.kr> >>. All rights reserved.
+Copyright (c) 2008-2009, Keedi Kim - 김도형 C<< <keedi@cpan.org> >>. All rights reserved.
 
 This module is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself. See L<perlartistic>.

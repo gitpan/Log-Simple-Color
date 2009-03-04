@@ -3,7 +3,10 @@ use strict;
 use inc::Module::Install 0.77;
 
 if ( -e 'MANIFEST.SKIP' ) {
-    system( 'pod2text lib/Log/Simple/Color.pm > README' );
+    system(
+          'perl -Mutf8 -MPod::Simple::Text -e '
+        . '"binmode STDOUT, q{:utf8}; Pod::Simple::Text->parse_from_file(@ARGV)" '
+        . 'lib/Log/Simple/Color.pm > README' );
 }
 
 # Define metadata
@@ -19,7 +22,6 @@ requires      'File::Spec'      => '0.80';
 requires      'Module::Install' => '0.77';
 requires      'Term::ANSIColor' => '1.12' unless win32;
 requires      'Win32::Console'  => '0.09' if win32;
-requires      'Perl6::Say'      => '0.12' if $] < 5.010;
 test_requires 'Test::More'      => '0.42';
 
 #homepage       '';

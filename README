@@ -1,25 +1,28 @@
 NAME
-    Log::Simple::Color - log messages with different color for console
+
+    Log::Simple::Color - Log messages with different color for console
 
 VERSION
-    This document describes Log::Simple::Color version 0.0.1
+
+    This document describes Log::Simple::Color version 0.0.2
 
 SYNOPSIS
+
         use strict;
         use warnings;
         use Log::Simple::Color;
-    
+        
         my $log = Log::Simple::Color->new;
-    
+        
         print "current log level: ", $log->level, "\n";
         $log->level('debug');
         print "current log level: ", $log->level, "\n";
-    
+        
         $log->debug("This is a debug message");
         $log->info("This is an info message");
         $log->warning("This is a warning message");
         $log->error("This is an error message");
-    
+        
         $log->color(
             mode => 'debug',
             fg   => 'yellow',
@@ -27,15 +30,17 @@ SYNOPSIS
             bold => 1,
             dark => 1,
         );
-    
+        
         $log->debug("you can set different color");
 
 DESCRIPTION
+
     This is a simple logging module for coloring text. You can set
-    foreground color or background color for your text. This module supports
-    ANSI terminals and Win32 systems.
+    foreground color or background color for your text. This module
+    supports ANSI terminals and Win32 systems.
 
 INSTALLATION
+
     To install this module, run the following commands:
 
             perl Makefile.PL
@@ -44,26 +49,34 @@ INSTALLATION
             make install
 
 INTERFACE
-  new
+
+ new
+
         my $log = Log::Simple::Color->new;
 
-  debug
+ debug
+
         $log->debug("This is a debug message");
 
-  info
+ info
+
         $log->info("This is an info message");
 
-  warning
+ warning
+
         $log->warning("This is a warning message");
 
-  error
+ error
+
         $log->error("This is an error message");
 
-  level
+ level
+
         $log->level;
         $log->level('warning');
 
-  color
+ color
+
         $log->color('debug', 'blue');
         $log->color('debug', 'blue', 'yellow');
         $log->color('debug', undef, 'yellow');
@@ -74,38 +87,42 @@ INTERFACE
         );
 
 DEPENDENCIES
-    *   Perl6::Say - if perl version is below than 5.10
 
-    *   Win32::Console - if OS is win32
+      * Win32::Console - if OS is win32
 
-    *   Term::ANSIColor - if terminal supports ANSI
+      * Term::ANSIColor - if terminal supports ANSI
 
 INCOMPATIBILITIES
+
     None reported.
 
 BUGS AND LIMITATIONS
+
     No bugs have been reported.
 
     Please report any bugs or feature requests to
-    "bug-log-simple-color@rt.cpan.org", or through the web interface at
-    <http://rt.cpan.org>.
+    bug-log-simple-color@rt.cpan.org, or through the web interface at
+    http://rt.cpan.org.
 
 AUTHOR
-    Keedi Kim - 김도형 "<keedi@perl.kr>"
+
+    Keedi Kim - 김도형 <keedi@cpan.org>
 
 LICENCE AND COPYRIGHT
-    Copyright (c) 2008, Keedi Kim - 김도형 "<keedi@perl.kr>". All rights
+
+    Copyright (c) 2008-2009, Keedi Kim - 김도형 <keedi@cpan.org>. All rights
     reserved.
 
     This module is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself. See perlartistic.
 
 DISCLAIMER OF WARRANTY
+
     BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-    FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
-    OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
-    PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-    EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT
+    WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER
+    PARTIES PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND,
+    EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
     WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
     ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
     YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
