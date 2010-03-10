@@ -1,6 +1,6 @@
 package Log::Simple::Color;
 
-use version; our $VERSION = qv('0.0.2');
+use version; our $VERSION = qv('0.0.3');
 
 use 5.008_001;
 use strict;
@@ -293,7 +293,7 @@ Log::Simple::Color - Log messages with different color for console
 
 =head1 VERSION
 
-This document describes Log::Simple::Color version 0.0.2
+This document describes Log::Simple::Color version 0.0.3
 
 
 =head1 SYNOPSIS
